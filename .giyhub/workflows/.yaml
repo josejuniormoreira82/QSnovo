@@ -1,9 +1,9 @@
-name: run QS1.py
+name: Run Python Script
 
 on:
   schedule:
-    - cron: |'*/5****'
-
+    # Execute de segunda a sexta-feira às 9:00 UTC
+    - cron: "0 5 * * 1-5"
 
 jobs:
   run-script:
@@ -25,11 +25,9 @@ jobs:
 
     - name: Run Python script
       run: |
-        python QS2.py
+        python seu_script.py
       env:
+        MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
         USUARIO: ${{ secrets.USUARIO }}
         SENHA: ${{ secrets.SENHA }}
-        ANTICAPTCH_API_KEY: ${{ secrets.ANTICAPTCHA_API_KEY }}
         MAIL_USER: ${{ secrets.MAIL_USER }}
-        MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
-
