@@ -1,0 +1,35 @@
+name: run QS1.py
+
+on:
+  schedule:
+    - cron: |'*/5****'
+
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # Certifique-se de ter um arquivo requirements.txt com todas as dependências
+
+    - name: Run Python script
+      run: |
+        python QS2.py
+      env:
+        USUARIO: ${{ secrets.USUARIO }}
+        SENHA: ${{ secrets.SENHA }}
+        ANTICAPTCH_API_KEY: ${{ secrets.ANTICAPTCHA_API_KEY }}
+        MAIL_USER: ${{ secrets.MAIL_USER }}
+        MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+
