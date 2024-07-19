@@ -25,9 +25,10 @@ jobs:
 
     - name: Run Python script
       run: |
-        python seu_script.py
+        python QS2.py
       env:
-        MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
         USUARIO: ${{ secrets.USUARIO }}
         SENHA: ${{ secrets.SENHA }}
+        ANTICAPTCHA_API_KEY: ${{ secrets.ANTICAPTCHA_API_KEY }}
         MAIL_USER: ${{ secrets.MAIL_USER }}
+        MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
