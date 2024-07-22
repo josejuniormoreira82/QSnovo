@@ -6,7 +6,7 @@ on:
     - cron: '*/2 * * * *'
 
 jobs:
-  run-script:
+  run-schedule:
     runs-on: ubuntu-latest
 
     steps:
