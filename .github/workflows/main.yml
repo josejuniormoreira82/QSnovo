@@ -1,35 +1,31 @@
-name: Run Python Script WB QS1
+name: Run Python Script WB QS2
 
 on:
   schedule:
-    # Execute de segunda a sexta-feira às 9:00 UTC
-    - cron: "*/2 * * * *"
+    - cron: '*/2 * * * *'
 
 jobs:
   run-schedule:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt  # Certifique-se de ter um arquivo requirements.txt com todas as dependências
+      - name: Install dependencies
+        run: python -m pip install pip install -r requirements.txt 
 
-    - name: Run Python script
-      env:
-        USUARIO: ${{ secrets.USUARIO }}
-        SENHA: ${{ secrets.SENHA }}
-        ANTICAPTCHA_API_KEY: ${{ secrets.ANTICAPTCHA_API_KEY }}
-        MAIL_USER: ${{ secrets.MAIL_USER }}
-        MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+      - name: Run Python script
+        env:
+          USUARIO: ${{ secrets.USUARIO }}
+          SENHA: ${{ secrets.SENHA }}
+          ANTICAPTCHA_API_KEY: ${{ secrets.ANTICAPTCHA_API_KEY }}
+          MAIL_USER: ${{ secrets.MAIL_USER }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
 
-      run: |
-        python QS2.py
+        run: python QS2.py
