@@ -1,7 +1,7 @@
 on:
   schedule:
     # Execute de segunda a sexta-feira às 9:00 UTC
-    - cron: "*/5* * * *"
+    - cron: #"*/5* * * *"
 
 jobs:
   run-script:
