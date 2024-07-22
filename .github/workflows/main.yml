@@ -3,7 +3,7 @@ name: Run Python Script
 on:
   schedule:
     # Execute de segunda a sexta-feira às 9:00 UTC
-    - cron: '*/5 * * * *'
+    - cron: '*/2 * * * *'
 
 jobs:
   run-script:
