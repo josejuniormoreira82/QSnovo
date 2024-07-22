@@ -11,12 +11,12 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.x'
+        python-version: '3.11'
 
     - name: Install dependencies
       run: |
@@ -24,11 +24,12 @@ jobs:
         pip install -r requirements.txt  # Certifique-se de ter um arquivo requirements.txt com todas as dependências
 
     - name: Run Python script
-      run: |
-        python QS2.py
       env:
         USUARIO: ${{ secrets.USUARIO }}
         SENHA: ${{ secrets.SENHA }}
         ANTICAPTCHA_API_KEY: ${{ secrets.ANTICAPTCHA_API_KEY }}
         MAIL_USER: ${{ secrets.MAIL_USER }}
         MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+
+      run: |
+        python QS2.py
