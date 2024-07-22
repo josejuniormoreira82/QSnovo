@@ -1,9 +1,9 @@
-name: Run Python Script WB QS
+name: Run Python Script WB QS1
 
 on:
   schedule:
     # Execute de segunda a sexta-feira às 9:00 UTC
-    - cron: '*/2 * * * *'
+    - cron: "*/2 * * * *"
 
 jobs:
   run-schedule:
