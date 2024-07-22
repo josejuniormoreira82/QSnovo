@@ -1,7 +1,9 @@
+name: Run Python Script
+
 on:
   schedule:
     # Execute de segunda a sexta-feira às 9:00 UTC
-    - cron: #"*/5* * * *"
+    - cron: "*/5* * * *"
 
 jobs:
   run-script:
@@ -9,23 +11,17 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4.1.6
-
-    - name: Set up Node.js 20
-      uses: actions/setup-node@v4
-        with:
-          node-version: '20.x
-
+      uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+      with:
+        python-version: '3.11'
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r requirements.txt  # Certifique-se de ter um arquivo requirements.txt com todas as dependências
 
     - name: Run Python script
       env:
@@ -34,7 +30,6 @@ jobs:
         ANTICAPTCHA_API_KEY: ${{ secrets.ANTICAPTCHA_API_KEY }}
         MAIL_USER: ${{ secrets.MAIL_USER }}
         MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
-       
-       run: |
-         python QS2.py
-   
+
+      run: |
+        python QS2.py
