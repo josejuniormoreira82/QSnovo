@@ -5,7 +5,7 @@ on:
     - cron: '*/2 * * * *'
 
 jobs:
-  run-schedule:
+  run_schedule:
     runs-on: ubuntu-latest
     steps:
     
@@ -24,10 +24,10 @@ jobs:
 
       - name: Run Python script
         env:
-          USUARIO: ${{ secrets.USUARIO }}
-          SENHA: ${{ secrets.SENHA }}
-          ANTICAPTCHA_API_KEY: ${{ secrets.ANTICAPTCHA_API_KEY }}
-          MAIL_USER: ${{ secrets.MAIL_USER }}
-          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          USUARIO: $ {{ secrets.USUARIO }}
+          SENHA: $ {{ secrets.SENHA }}
+          ANTICAPTCHA_API_KEY: $ {{ secrets.ANTICAPTCHA_API_KEY }}
+          MAIL_USER: $ {{ secrets.MAIL_USER }}
+          MAIL_PASSWORD: $ {{ secrets.MAIL_PASSWORD }}
 
         run: python QS2.py
