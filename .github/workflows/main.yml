@@ -22,13 +22,17 @@ jobs:
         with:
           requirements: requirements.txt
           update-pip: true
-
-      - name: Instalação do Chrome Dreive
-        uses: logikal-io/run-logikal-playbook@v1
-        with:
-          roles: chromedriver
-          vars: '{"chrome_package_version": "{version}"}'
           
+      - name: Instalação do Chrome driver
+        uses: nanasess/setup-chromedriver@v2
+        with:
+          # Optional: do not specify to match Chrome's version
+          chromedriver-version: '88.0.4324.96'
+      - run: |
+          export DISPLAY=:99
+          chromedriver --url-base=/wd/hub &
+          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional     
+           
       - name: Executar Python script
         env:
           USUARIO: $ {{ secrets.USUARIO }}
