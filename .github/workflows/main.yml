@@ -12,13 +12,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup job
+      - name: Ajuste da versão node
         uses: nickofthyme/checkout-node-setup@v1
         with:
           persist-credentials: false
           useRollingCache: true
           
-      - name: Set up Python
+      - name: Ajuste Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -35,7 +35,7 @@ jobs:
           roles: chromedriver
           vars: '{"chrome_package_version": "{version}"}'
           
-      - name: Run Python script
+      - name: Executar Python script
         env:
           USUARIO: $ {{ secrets.USUARIO }}
           SENHA: $ {{ secrets.SENHA }}
