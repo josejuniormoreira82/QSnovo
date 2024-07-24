@@ -11,13 +11,7 @@ jobs:
     
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Ajuste da versão node
-        uses: nickofthyme/checkout-node-setup@v1
-        with:
-          persist-credentials: false
-          useRollingCache: true
-          
+         
       - name: Ajuste Python
         uses: actions/setup-python@v5
         with:
