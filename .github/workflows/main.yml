@@ -12,10 +12,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js 20
-        uses: actions/setup-node@v4
+      - name: Setup job
+        uses: nickofthyme/checkout-node-setup@v1
         with:
-          node-version: 20
+          persist-credentials: false
+          useRollingCache: true
           
       - name: Set up Python
         uses: actions/setup-python@v5
