@@ -17,10 +17,11 @@ jobs:
         with:
           python-version: '3.11'
 
-      uses: aabadie/action-install-python-requirements@v2.0.1
+      - name: Instalação das biliotecas
+        uses: aabadie/action-install-python-requirements@v2.0.1
         with:
-        requirements: requirements.txt
-        update-pip: true
+          requirements: requirements.txt
+          update-pip: true
 
       - name: Run Python script
         env:
