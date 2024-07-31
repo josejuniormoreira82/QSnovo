@@ -2,11 +2,11 @@ name: Run Python Script WB QS2
 
 on:
   schedule:
-    - cron: '*/2 * * * *'
+    - cron: '*/1 * * * *'
 
 jobs:
   run_schedule:
-    runs-on: windows-2019
+    runs-on: Windows-latest
     steps:
     
       - name: Checkout repository
