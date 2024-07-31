@@ -26,7 +26,7 @@ jobs:
       - name: Instalação do Chrome and ChromeDriver
         uses: browser-actions/setup-chrome@v1
         with:
-          chrome-version: 120
+          chrome-version: 126
           install-chromedriver: true
           
       - name: Executar Python script
