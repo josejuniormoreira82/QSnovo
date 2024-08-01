@@ -1,6 +1,6 @@
 name: Run Python Script WB QS2
 
-#on:
+on:
   schedule:
     - cron: '*/1 * * * *'
 
