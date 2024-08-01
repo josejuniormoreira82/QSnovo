@@ -92,9 +92,9 @@ chave_captcha = driver.find_element(By.XPATH, '//*[@id="pnlControls"]/div/div[2]
 
 solver = recaptchaV2Proxyless()
 solver.set_verbose(1)
-solver.set_key(anticaptcha_api_key)
-solver.set_website_url(link2)
-solver.set_website_key(chave_captcha)
+solver.set_key("anticaptcha_api_key")
+solver.set_website_url("link2")
+solver.set_website_key("chave_captcha")
 
 resposta = solver.solve_and_return_solution()
 
