@@ -1,6 +1,6 @@
 name: Run Python Script WB QS2
 
-on:
+#on:
   schedule:
     - cron: '*/1 * * * *'
 
@@ -16,13 +16,13 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
+      
       - name: Instalação das biliotecas
         uses: aabadie/action-install-python-requirements@v2.0.1
         with:
           requirements: requirements.txt
           update-pip: true
-
+      
       - name: Instalação do Chrome and ChromeDriver
         uses: browser-actions/setup-chrome@v1
         with:
@@ -36,6 +36,6 @@ jobs:
           ANTICAPTCHA_API_KEY: $ {{ secrets.ANTICAPTCHA_API_KEY }}
           MAIL_USER: $ {{ secrets.MAIL_USER }}
           MAIL_PASSWORD: $ {{ secrets.MAIL_PASSWORD }}
-
-       - name: Executar Python script
-           run: python QS2.py
+        
+        - name: Executar Python script
+          run: python QS2.py
