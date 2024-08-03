@@ -1,6 +1,6 @@
 name: Run Python Script WB QS2
 
-#on:
+on:
   schedule:
     - cron: '*/1 * * * *'
 
@@ -29,7 +29,7 @@ jobs:
           chrome-version: 126
           install-chromedriver: true
           
-      - name: Executar Python script
+      - name: Baixar as senhas
         env:
           USUARIO: $ {{ secrets.USUARIO }}
           SENHA: $ {{ secrets.SENHA }}
@@ -37,4 +37,5 @@ jobs:
           MAIL_USER: $ {{ secrets.MAIL_USER }}
           MAIL_PASSWORD: $ {{ secrets.MAIL_PASSWORD }}
 
-        run: python QS2.py
+       - name: Executar Python script
+           run: python QS2.py
