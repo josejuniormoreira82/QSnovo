@@ -29,7 +29,7 @@ jobs:
           chrome-version: 126
           install-chromedriver: true
           
-      - name: Baixar as senhas
+      - name: Executar o script python
         env:
           USUARIO: $ {{ secrets.USUARIO }}
           SENHA: $ {{ secrets.SENHA }}
@@ -37,5 +37,4 @@ jobs:
           MAIL_USER: $ {{ secrets.MAIL_USER }}
           MAIL_PASSWORD: $ {{ secrets.MAIL_PASSWORD }}
         
-       - name: Executar Python script
-           run: python QS2.py
+        run: python QS2.py
