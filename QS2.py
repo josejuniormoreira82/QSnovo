@@ -87,7 +87,7 @@ sleep(5)
 
 # Resolver o Captcha
 link2 = "https://cmegroup-sso.quikstrike.net/User/Disclaimer.aspx?ret=%2fUser%2fQuikStrikeView.aspx%3finit%3d"
-WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="pnlControls"]/div/div[2]')))
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="pnlControls"]/div/div[2]')))
 chave_captcha = driver.find_element(By.XPATH, '//*[@id="pnlControls"]/div/div[2]').get_attribute('data-sitekey')
 
 solver = recaptchaV2Proxyless()
@@ -107,7 +107,7 @@ else:
     print("task finished with error: " + solver.error_code)
 
 # Aguarda a página carregar
-sleep(5)
+sleep(15)
 
 # Acessar Ativo SP
 buttonopint = driver.find_element(By.XPATH, '//*[@id="ctl00_ucMenuBar_lvMenuBar_ctrl2_lbMenuItem"]')
