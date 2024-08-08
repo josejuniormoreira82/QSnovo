@@ -35,6 +35,22 @@ from email import encoders
 import warnings
 warnings.filterwarnings('ignore')
 
+
+# Função espera_carregar_pagina em vez de sleep para esperar a página carregar
+def espera_carregar_pagina(driver, timeout=30):
+    import time
+    
+    end_time = time.time() + timeout
+    while time.time() < end_time:
+        state = driver.execute_script("return document.readyState")
+        print("Loading...")
+        if state == "complete":
+            print("Page loaded.")
+            return True
+        time.sleep(0.5)  # Aguarde meio segundo antes de verificar novamente
+    print("Loading timeout.")
+    return False
+
 # Carrega as variáveis do arquivo .env
 load_dotenv()
 
@@ -64,30 +80,34 @@ link1 = "https://cmegroup.quikstrike.net/Account/Login.aspx?ReturnUrl=%2fUser%2f
 driver.get(link1)
 
 # Aguarda a página carregar
-sleep(5)
+espera_carregar_pagina(driver)
 
 # Clique no botão "Continue" (verifique se o Xpath está correto)
 button_continue = driver.find_element(By.XPATH, '/html/body/form/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/p[2]/input')
+espera_carregar_pagina(driver)
 button_continue.click()
 sleep(5)
 
 # Login no Site usando as credenciais carregadas do arquivo .env
 input_usuario = driver.find_element(By.ID, "user")
+espera_carregar_pagina(driver)
 input_usuario.send_keys(name)
 sleep(5)
 
 input_senha = driver.find_element(By.ID, "pwd")
+espera_carregar_pagina(driver)
 input_senha.send_keys(senha)
 sleep(5)
 
 # Clica no botão de login (verifique se o ID está correto)
 button_login = driver.find_element(By.ID, "loginBtn")
+espera_carregar_pagina(driver)
 button_login.click()
 sleep(5)
 
 # Resolver o Captcha
 link2 = "https://cmegroup-sso.quikstrike.net/User/Disclaimer.aspx?ret=%2fUser%2fQuikStrikeView.aspx%3finit%3d"
-WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="pnlControls"]/div/div[2]')))
+WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="pnlControls"]/div/div[2]')))
 chave_captcha = driver.find_element(By.XPATH, '//*[@id="pnlControls"]/div/div[2]').get_attribute('data-sitekey')
 
 solver = recaptchaV2Proxyless()
@@ -107,28 +127,31 @@ else:
     print("task finished with error: " + solver.error_code)
 
 # Aguarda a página carregar
-sleep(15)
+espera_carregar_pagina(driver)
 
 # Acessar Ativo SP
 buttonopint = driver.find_element(By.XPATH, '//*[@id="ctl00_ucMenuBar_lvMenuBar_ctrl2_lbMenuItem"]')
 buttonopint.click()
-sleep(8)
+sleep(5)
 
 buttonselcativ = driver.find_element(By.XPATH, '//*[@id="ctl08_hlProductArrow"]')
 buttonselcativ.click()
-sleep(8)
+sleep(5)
 
 buttoneqind = driver.find_element(By.XPATH, '//*[@id="ctl08_ucProductSelectorPopup_pnlProductSelectorPopup"]/div/div/div[1]/div[2]/a[4]')
 buttoneqind.click()
-sleep(8)
+sleep(5)
 
 buttones500 = driver.find_element(By.XPATH, '//*[@id="ctl08_ucProductSelectorPopup_pnlProductSelectorPopup"]/div/div/div[3]/div[2]/a[1]')
 buttones500.click()
-sleep(8)
+sleep(5)
 
 buttonOI = driver.find_element(By.XPATH, '//*[@id="MainContent_ucViewControl_OpenInterestV2_lbOIMatrix"]')
 buttonOI.click()
-sleep(10)
+sleep(5)
+
+# Aguarda a página carregar
+espera_carregar_pagina(driver)
 
 # Baixar a tabela das opções
 tbsp500 = driver.find_element(By.XPATH, '//*[@id="MainContent_ucViewControl_OpenInterestV2_ucMatrixVC_ucMatrix_pnlMatrix"]/table')
@@ -159,7 +182,10 @@ df1sp500 = tratar_tabela1(html_tbsp500)
 # Acessando a tabela de volatividade do ativo
 buttonOInf = driver.find_element(By.XPATH, '//*[@id="ctl00_ucMenuBar_lvMenuBar_ctrl4_lbMenuItem"]')
 buttonOInf.click()
-sleep(10)
+sleep(5)
+
+# Aguarda a página carregar
+espera_carregar_pagina(driver)
 
 # Importar o HTML com a planilha das informações de vol do ativo
 tbsp500i = driver.find_element(By.XPATH, '//*[@id="MainContent_ucViewControl_OptionsInfo_ucSummary_ucSummaryControlV2_ucATMs_ucSheetVC_ucSheet_divSheet"]/table')
@@ -205,27 +231,30 @@ dfiasp500 = tratar_tabela2(html_tbsp500i)
 # Acessar Ativo NQ
 buttonopint = driver.find_element(By.XPATH, '//*[@id="ctl00_ucMenuBar_lvMenuBar_ctrl2_lbMenuItem"]')
 buttonopint.click()
-sleep(10)
+sleep(5)
 
 buttonopint = driver.find_element(By.XPATH, '//*[@id="ctl08_imgArrow"]')
 buttonopint.click()
-sleep(10)
+sleep(5)
 
 buttonselcativ1 = driver.find_element(By.XPATH, '//*[@id="ctl08_ucProductSelectorPopup_pnlProductSelectorPopup"]/div/div/div[1]/div[2]/a[4]')
 buttonselcativ1.click()
-sleep(10)
+sleep(5)
 
 buttoneqind1 = driver.find_element(By.XPATH, '//*[@id="ctl08_ucProductSelectorPopup_pnlProductSelectorPopup"]/div/div/div[1]/div[2]/a[4]')
 buttoneqind1.click()
-sleep(10)
+sleep(5)
 
 buttonnq2 = driver.find_element(By.XPATH, '//*[@id="ctl08_ucProductSelectorPopup_pnlProductSelectorPopup"]/div/div/div[3]/div[2]/a[2]')
 buttonnq2.click()
-sleep(10)
+sleep(5)
 
 buttonOI = driver.find_element(By.XPATH, '//*[@id="MainContent_ucViewControl_OpenInterestV2_lbOIMatrix"]')
 buttonOI.click()
-sleep(10)
+sleep(5)
+
+# Aguarda a página carregar
+espera_carregar_pagina(driver)
 
 # Baixar a tabela das opções
 tbnq100 = driver.find_element(By.XPATH, '//*[@id="MainContent_ucViewControl_OpenInterestV2_ucMatrixVC_ucMatrix_pnlMatrix"]/table')
@@ -237,7 +266,10 @@ df1nq100 = tratar_tabela1(html_tbnq100)
 # Ir para a pagina com as tabelas de vol do ativo
 buttonOInf = driver.find_element(By.XPATH, '//*[@id="ctl00_ucMenuBar_lvMenuBar_ctrl4_lbMenuItem"]')
 buttonOInf.click()
-sleep(10)
+sleep(5)
+
+# Aguarda a página carregar
+espera_carregar_pagina(driver)
 
 # Importar o HTML com a planilha das informações de vol do ativo
 tbnq100i = driver.find_element(By.XPATH, '//*[@id="MainContent_ucViewControl_OptionsInfo_ucSummary_ucSummaryControlV2_ucATMs_ucSheetVC_ucSheet_divSheet"]/table')
@@ -260,6 +292,7 @@ def tratar_tabela3(html_tabela3):
 link3 = "https://www.cmegroup.com/markets/equities/nasdaq/e-mini-nasdaq-100.settlements.html"  # Substitua pelo link desejado
 driver.get(link3)
 sleep(5)
+espera_carregar_pagina(driver)
 
 # Importar a tabela dos Ajustes Mini NQ
 tbajnq100 = driver.find_element(By.XPATH, '/html/body/main/div/div[3]/div[3]/div/div/div/div/div/div[2]/div/div/div/div/div/div[8]/div/div')
@@ -272,6 +305,7 @@ dfajnq100 = tratar_tabela3(html_tbajnq100)
 link4 = "https://www.cmegroup.com/markets/equities/sp/e-mini-sandp500.settlements.html"  # Substitua pelo link desejado
 driver.get(link4)
 sleep(5)
+espera_carregar_pagina(driver)
 
 # Importar a tabela dos Ajustes Mini ESP
 tbajsp500 = driver.find_element(By.XPATH, '//*[@id="productTabData"]/div/div/div/div/div/div[2]/div/div/div/div/div/div[8]/div/div')
@@ -279,6 +313,7 @@ html_tbajsp500 = tbajsp500.get_attribute("outerHTML")
 
 # Tratamento da Tabela de Ajuste
 dfajsp500 = tratar_tabela3(html_tbajsp500)
+
 
 # Iniciando o Excel
 wb = Workbook()
