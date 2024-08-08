@@ -107,7 +107,7 @@ sleep(5)
 
 # Resolver o Captcha
 link2 = "https://cmegroup-sso.quikstrike.net/User/Disclaimer.aspx?ret=%2fUser%2fQuikStrikeView.aspx%3finit%3d"
-WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="pnlControls"]/div/div[2]')))
+WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.XPATH, '//*[@id="pnlControls"]/div/div[2]')))
 chave_captcha = driver.find_element(By.XPATH, '//*[@id="pnlControls"]/div/div[2]').get_attribute('data-sitekey')
 
 solver = recaptchaV2Proxyless()
