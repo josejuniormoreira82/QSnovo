@@ -84,30 +84,29 @@ espera_carregar_pagina(driver)
 
 # Clique no botão "Continue" (verifique se o Xpath está correto)
 button_continue = driver.find_element(By.XPATH, '/html/body/form/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div[1]/div[2]/div[2]/p[2]/input')
-espera_carregar_pagina(driver)
 button_continue.click()
-sleep(5)
+
 
 # Login no Site usando as credenciais carregadas do arquivo .env
-input_usuario = driver.find_element(By.ID, "user")
 espera_carregar_pagina(driver)
+input_usuario = driver.find_element(By.ID, "user")
 input_usuario.send_keys(name)
-sleep(5)
+sleep(2)
 
 input_senha = driver.find_element(By.ID, "pwd")
-espera_carregar_pagina(driver)
 input_senha.send_keys(senha)
-sleep(5)
+sleep(2)
 
 # Clica no botão de login (verifique se o ID está correto)
 button_login = driver.find_element(By.ID, "loginBtn")
-espera_carregar_pagina(driver)
 button_login.click()
-sleep(5)
+
+# Aguarda a página carregar
+espera_carregar_pagina(driver)
 
 # Resolver o Captcha
 link2 = "https://cmegroup-sso.quikstrike.net/User/Disclaimer.aspx?ret=%2fUser%2fQuikStrikeView.aspx%3finit%3d"
-WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.XPATH, '//*[@id="pnlControls"]/div/div[2]')))
+WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="pnlControls"]/div/div[2]')))
 chave_captcha = driver.find_element(By.XPATH, '//*[@id="pnlControls"]/div/div[2]').get_attribute('data-sitekey')
 
 solver = recaptchaV2Proxyless()
